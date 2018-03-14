@@ -112,6 +112,9 @@ class OozieApi(object):
     for key, val in filters:
       if key not in OozieApi.VALID_JOB_FILTERS:
         raise ValueError('"%s" is not a valid filter for selecting jobs' % (key,))
+      if key == 'startcreatedtime':
+        params['startcreatedtime'] = val
+        continue
       filter_list.append('%s=%s' % (key, val))
     params['filter'] = ';'.join(filter_list)
 
